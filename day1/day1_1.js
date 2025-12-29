@@ -17,7 +17,11 @@ const input = rawInput.split("\r\n");
 const parseDir = (dir) => (dir === "R" ? 1 : -1);
 
 const output = input
+  // parse the string into a tuple of two strings
   .map((itemStr) => [itemStr[0], itemStr.slice(1)])
-  .map(([dirStr, numStr]) => [parseDir(dirStr), parseInt(numStr, 10)]);
+  //   parse them into polarity and integers of turnings
+  .map(([dirStr, numStr]) => [parseDir(dirStr), parseInt(numStr, 10)])
+  //   multiply that to get turnings with direction inherent
+  .map(([polarity, numTurns]) => polarity * numTurns);
 
 console.log(output);
