@@ -11,8 +11,13 @@ const rawInput = readFileSync(inputFile, { encoding: "utf8" });
 
 const input = rawInput.split("\r\n");
 
+// this is a helper function, dir can either equal "L" or "R"
+// "R" is a positive turn, "L" is a negative turn
+// note, this isnt vbery defensive we dont confirm the L
+const parseDir = (dir) => (dir === "R" ? 1 : -1);
+
 const output = input
   .map((itemStr) => [itemStr[0], itemStr.slice(1)])
-  .map(([dir, numStr]) => [dir, parseInt(numStr, 10)]);
+  .map(([dirStr, numStr]) => [parseDir(dirStr), parseInt(numStr, 10)]);
 
 console.log(output);
