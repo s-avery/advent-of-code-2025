@@ -3,6 +3,10 @@
 // Retrieved 2025-12-29, License - CC BY-SA 4.0
 import { readFileSync } from "fs";
 
-const input = readFileSync("./testData.txt", { encoding: "utf8" });
+const args = process.argv.slice(2)
+
+const inputFile = args[0]
+
+const input = readFileSync(inputFile, { encoding: "utf8" });
 
 console.log(input.split("\r\n"));
