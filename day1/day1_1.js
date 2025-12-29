@@ -7,9 +7,11 @@ const args = process.argv.slice(2);
 
 const inputFile = args[0];
 
-const rawInput = readFileSync(inputFile, { encoding: "utf8" });
+const rawInput = readFileSync(inputFile, { encoding: "utf8" }).trim();
 
-const input = rawInput.split("\r\n");
+// console.log(JSON.stringify(rawInput));
+
+const input = rawInput.split("\n");
 
 // this is a helper function, dir can either equal "L" or "R"
 // "R" is a positive turn, "L" is a negative turn
@@ -25,3 +27,19 @@ const output = input
   .map(([polarity, numTurns]) => polarity * numTurns);
 
 console.log(output);
+
+let dialPosition = 50;
+
+let zeroCount = 0;
+
+console.log(`starting position: ${dialPosition}`);
+
+for (const turning of output) {
+  console.log(`turning by: ${turning}`);
+  dialPosition = dialPosition + turning;
+  console.log(`dial position: ${dialPosition}`);
+  if (dialPosition % 100 === 0) {
+    zeroCount++;
+  }
+  console.log(`zero count: ${zeroCount}`);
+}
