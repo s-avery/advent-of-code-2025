@@ -30,14 +30,15 @@ const output = input
   .map(([polarity, numTurns]) => polarity * numTurns)
   .reduce(
     ({ count, currentPosition }, currentTurning) => {
-      console.log(
-        "\ncount: ",
-        count,
-        "\ncurrent position: ",
-        currentPosition,
-        "\nturning by: ",
-        currentTurning
-      );
+      // // internal checking of the steps
+      // console.log(
+      //   "\ncount: ",
+      //   count,
+      //   "\ncurrent position: ",
+      //   currentPosition,
+      //   "\nturning by: ",
+      //   currentTurning
+      // );
       const newPosition = currentPosition + currentTurning;
       return {
         count: newPosition % 100 === 0 ? count + 1 : count,
@@ -45,7 +46,7 @@ const output = input
       };
     },
     { count: 0, currentPosition: 50 }
-  );
+  )["count"];
 
 console.log(output);
 
