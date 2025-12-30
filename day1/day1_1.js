@@ -27,22 +27,43 @@ const output = input
   //   parse them into polarity and integers of turnings
   .map(([dirStr, numStr]) => [parseDir(dirStr), parseInt(numStr, 10)])
   //   multiply that to get turnings with direction inherent
-  .map(([polarity, numTurns]) => polarity * numTurns);
+  .map(([polarity, numTurns]) => polarity * numTurns)
+  .reduce(
+    ({ count, currentPosition }, currentTurning) => {
+      console.log(
+        "\ncount: ",
+        count,
+        "\ncurrent position: ",
+        currentPosition,
+        "\nturning by: ",
+        currentTurning
+      );
+      const newPosition = currentPosition + currentTurning;
+      return {
+        count: newPosition % 100 === 0 ? count + 1 : count,
+        currentPosition: newPosition,
+      };
+    },
+    { count: 0, currentPosition: 50 }
+  );
 
 console.log(output);
 
-let dialPosition = 50;
+// // ITERATIVE APPROACH
+// //note: for this to run, output above needs to break before the reduce step
 
-let zeroCount = 0;
+// let dialPosition = 50;
 
-console.log(`starting position: ${dialPosition}`);
+// let zeroCount = 0;
 
-for (const turning of output) {
-  console.log(`turning by: ${turning}`);
-  dialPosition = dialPosition + turning;
-  console.log(`dial position: ${dialPosition}`);
-  if (dialPosition % 100 === 0) {
-    zeroCount++;
-  }
-  console.log(`zero count: ${zeroCount}`);
-}
+// console.log(`starting position: ${dialPosition}`);
+
+// for (const turning of output) {
+//   console.log(`turning by: ${turning}`);
+//   dialPosition = dialPosition + turning;
+//   console.log(`dial position: ${dialPosition}`);
+//   if (dialPosition % 100 === 0) {
+//     zeroCount++;
+//   }
+//   console.log(`zero count: ${zeroCount}`);
+// }
