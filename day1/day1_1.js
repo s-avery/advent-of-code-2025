@@ -11,7 +11,10 @@ const rawInput = readFileSync(inputFile, { encoding: "utf8" }).trim();
 
 // console.log(JSON.stringify(rawInput));
 
-const input = rawInput.split("\n");
+// this pattern matches on EITHER CRLF or LF input using regex
+// when we save the test data as a new .txt inw indows it is CRLF
+// however the provided puzzle data is saved originally in linux as LF
+const input = rawInput.split(/\r?\n/);
 
 // this is a helper function, dir can either equal "L" or "R"
 // "R" is a positive turn, "L" is a negative turn
